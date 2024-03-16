@@ -12,61 +12,60 @@ import { tokenBalance, tokenSymbol } from "./utils/icrc2_ledger";
 import { icpBalance } from "./utils/ledger";
 import { getAddressFromPrincipal } from "./utils/marketplace";
 
-
 const App = function AppWrapper() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [principal, setPrincipal] = useState('');
-  const [icrcBalance, setICRCBalance] = useState('');
-  const [balance, setICPBalance] = useState('');
-  const [symbol, setSymbol] = useState('');
-  const [address, setAddress] = useState('');
+  const [principal, setPrincipal] = useState("");
+  const [icrcBalance, setICRCBalance] = useState("");
+  const [balance, setICPBalance] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [address, setAddress] = useState("");
 
-  const getICRCBalance = useCallback(async () => {
-    if (authenticated) {
-      setICRCBalance(await tokenBalance());
-    }
-  });
+  // const getICRCBalance = useCallback(async () => {
+  //   if (authenticated) {
+  //     setICRCBalance(await tokenBalance());
+  //   }
+  // });
 
-  const getICPBalance = useCallback(async () => {
-    if (authenticated) {
-      setICPBalance(await icpBalance());
-    }
-  });
+  // const getICPBalance = useCallback(async () => {
+  //   if (authenticated) {
+  //     setICPBalance(await icpBalance());
+  //   }
+  // });
 
-  useEffect(async () => {
-    setSymbol(await tokenSymbol());
-  }, [setSymbol]);
+  // useEffect(async () => {
+  //   setSymbol(await tokenSymbol());
+  // }, [setSymbol]);
 
-  useEffect(async () => {
-    setAuthenticated(await isAuthenticated());
-  }, [setAuthenticated]);
+  // useEffect(async () => {
+  //   setAuthenticated(await isAuthenticated());
+  // }, [setAuthenticated]);
 
-  useEffect(async () => {
-    const principal = await getPrincipalText();
-    setPrincipal(principal);
-  }, [setPrincipal]);
+  // useEffect(async () => {
+  //   const principal = await getPrincipalText();
+  //   setPrincipal(principal);
+  // }, [setPrincipal]);
 
-  useEffect(async () => {
-    const principal = await getPrincipalText();
-    const account = await getAddressFromPrincipal(principal);
-    setAddress(account.account);
-  }, [setAddress]);
+  // useEffect(async () => {
+  //   const principal = await getPrincipalText();
+  //   const account = await getAddressFromPrincipal(principal);
+  //   setAddress(account.account);
+  // }, [setAddress]);
 
-  useEffect(() => {
-    getICRCBalance();
-  }, [getICRCBalance]);
+  // useEffect(() => {
+  //   getICRCBalance();
+  // }, [getICRCBalance]);
 
-  useEffect(() => {
-    getICPBalance();
-  }, [getICPBalance]);
+  // useEffect(() => {
+  //   getICPBalance();
+  // }, [getICPBalance]);
 
   return (
     <>
-    <Notification />
-      {authenticated ? (
-        <Container fluid="md">
-          <Nav className="justify-content-end pt-3 pb-5">
-            <Nav.Item>
+      <Notification />
+      {!authenticated ? (
+        <div>
+          {/* <Nav className="justify-content-end pb-5"> */}
+          {/* <Nav.Item>
               <Wallet
                 address={address}
                 principal={principal}
@@ -76,12 +75,12 @@ const App = function AppWrapper() {
                 isAuthenticated={authenticated}
                 destroy={destroy}
               />
-            </Nav.Item>
-          </Nav>
+            </Nav.Item> */}
+          {/* </Nav> */}
           <main>
-            <Products tokenSymbol={symbol} />
+            <Products tokenSymbol={"symbol"} />
           </main>
-        </Container>
+        </div>
       ) : (
         <Cover name="Street Food" login={login} coverImg={coverImg} />
       )}
